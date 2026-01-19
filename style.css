@@ -7,6 +7,8 @@
     box-sizing: border-box;
 }
 
+/* Generic */
+
 body {
     margin: 0;
     height: 100vh;
@@ -30,6 +32,9 @@ button {
 button:hover {
     color: white;
 }
+
+
+/* Sidebar */
 
 .sidebar {
     background-color: var(--cyan);
@@ -61,7 +66,7 @@ form.add-book input:focus-visible {
     outline: 3px solid var(--cornflower);
 }
 
-
+/* Library */
 
 .library {
     display: flex;

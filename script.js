@@ -70,3 +70,24 @@ function displayAllBooks(
 
 
 const library = [];
+
+//Add event listener for adding new books
+const addNewBookButton = document.querySelector('button#add-book');
+addNewBookButton.addEventListener('click', () => {
+    //Find book variables.
+    const name = document.querySelector('input#book-name').value;
+    const author = document.querySelector('input#book-author').value;
+    const genre = document.querySelector('input#book-genre').value;
+    const pages = document.querySelector('input#book-pages').value;
+
+    addBookToLibrary(
+        library,
+        name,
+        author,
+        genre,
+        pages,        
+    );
+
+    //Clear inputs
+    document.querySelectorAll('input').forEach((e) => {e.value = null;});
+});
