@@ -38,7 +38,7 @@ coldComfortFarm = new Book(
 imGladMyMomDied = new Book(
     "I'm Glad My Mom Died",
     'Jeanette McCurdy',
-    'Autibiography',
+    'Autobiography',
     340
 );
 
@@ -164,3 +164,14 @@ function removeBook(event) {
         //Remove the book from the display
         event.target.parentElement.remove();
 }
+
+
+//Clear display
+function clearDisplay() {
+    const cardContainer = document.querySelector('.card-container');
+    cardContainer.textContent = '';
+    //Set displaying flags to false
+    library.forEach(book => book.displaying = false);
+}
+
+document.querySelector('button#clear-display').addEventListener('click', clearDisplay);

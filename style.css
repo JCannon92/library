@@ -74,6 +74,10 @@ form.add-book input:focus-visible {
     background-color: var(--brick);
 }
 
+.button-container {
+    display: flex;
+}
+
 .card-container {
     height: 100%;
     margin: 20px;
