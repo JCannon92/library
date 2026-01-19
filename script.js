@@ -69,9 +69,6 @@ function addBookToLibrary(
     library.push(newBook);
 }
 
-
-
-//Add event listener for adding new books
 const addNewBookButton = document.querySelector('button#add-book');
 addNewBookButton.addEventListener('click', () => {
     //Find book variables.
@@ -94,6 +91,8 @@ addNewBookButton.addEventListener('click', () => {
 
 
 
+
+//Displaying books
 function displayBook(
     book,
 ) {
@@ -101,6 +100,7 @@ function displayBook(
         //Create the text elements
         const bookCard = document.createElement('div');
         bookCard.classList.add('book-card');
+        bookCard.id = book.id;
 
         const name = document.createElement('p');
         name.classList.add('book-name');
@@ -128,9 +128,12 @@ function displayBook(
         
 
         //Create and append the button
-        const bookRemoveButton = document.createElement('button');
-        bookRemoveButton.textContent = 'Remove Book';
-        bookCard.appendChild(bookRemoveButton);
+        const removeBookButton = document.createElement('button');
+        removeBookButton.id = 'remove-book';
+        removeBookButton.textContent = 'Remove Book';
+        //Add remove book functionality, see below
+        removeBookButton.addEventListener('click', removeBook)
+        bookCard.appendChild(removeBookButton);
 
         //Append the card as a child of the card-container element
         const library = document.querySelector('div.card-container');
@@ -144,3 +147,20 @@ const displayLibraryButton = document.querySelector('button#display-library');
 displayLibraryButton.addEventListener('click', () => {
     library.forEach(displayBook);
 });
+
+
+//Removing books
+function removeBookFromLibrary(id) {
+    //Find the book's index and then remove it from the library array
+    const bookIndex = library.findIndex(element => element.id === id);
+    if (bookIndex >= 0) {
+        library.splice(bookIndex);
+    };
+}
+
+function removeBook(event) {
+        //Remove the book from the library using the id of the bookCard (the same as the book's ID)
+        removeBookFromLibrary(event.target.parentElement.id);
+        //Remove the book from the display
+        event.target.parentElement.remove();
+}

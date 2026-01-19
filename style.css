@@ -90,6 +90,14 @@ form.add-book input:focus-visible {
     color: white;
     margin: 30px;
     padding: 20px;
+    border: none;
+    border-radius: 20px;
+}
+
+.book-card:hover,
+.book-card:focus,
+.book-card:focus-visible {
+    outline: 4px solid var(--cornflower);
 }
 
 .book-card p::before {
@@ -110,4 +118,8 @@ form.add-book input:focus-visible {
 
 .book-card p.book-pages::before {
     content: 'Pages: ';
+}
+
+button#remove-book {
+    align-self: center;
 }
