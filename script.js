@@ -87,6 +87,9 @@ addNewBookButton.addEventListener('click', () => {
 
     //Clear inputs
     document.querySelectorAll('input').forEach((e) => {e.value = null;});
+
+    //Display book
+    displayBook(library.slice(-1)[0]);
 });
 
 
