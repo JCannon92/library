@@ -1,0 +1,86 @@
+:root {
+    --cyan: #39918c;
+    --sand: #d0b49f;
+    --brick: #AB6B51;
+    --cornflower: #2f435a;
+    font-family: 'Nunito';
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+}
+
+button {
+    width: 150px;
+    height: 30px;
+    margin: 20px 30px;
+    border: none;
+    border-radius: 20px;
+    background-color: var(--cornflower);
+    color: rgb(255, 255, 255, 0.85);
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    color: white;
+}
+
+.sidebar {
+    background-color: var(--cyan);
+}
+
+form.add-book {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    align-items: center;
+    gap: 30px;
+    margin: 20px 40px;
+}
+
+form.add-book label {
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+}
+
+form.add-book input {
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+form.add-book input:focus,
+form.add-book input:focus-visible {
+    outline: 3px solid var(--cornflower);
+}
+
+
+
+.library {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--brick);
+}
+
+.card-container {
+    height: 100%;
+    margin: 20px;
+    background-color: var(--sand);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+}
+
+.book-card {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--brick);
+    color: white;
+}
