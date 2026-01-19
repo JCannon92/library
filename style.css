@@ -88,4 +88,26 @@ form.add-book input:focus-visible {
     flex-direction: column;
     background-color: var(--brick);
     color: white;
+    margin: 30px;
+    padding: 20px;
+}
+
+.book-card p::before {
+    font-style: italic;
+}
+
+.book-card p.book-name::before {
+    content: 'Name: '
+}
+
+.book-card p.book-author::before {
+    content: 'Author: ';
+}
+
+.book-card p.book-genre::before {
+    content: 'Genre: ';
+}
+
+.book-card p.book-pages::before {
+    content: 'Pages: ';
 }
