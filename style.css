@@ -69,6 +69,7 @@ form.add-book input:focus-visible {
 /* Library */
 
 .library {
+    max-height: 100%;
     display: flex;
     flex-direction: column;
     background-color: var(--brick);
@@ -81,21 +82,33 @@ form.add-book input:focus-visible {
 .card-container {
     height: 100%;
     margin: 20px;
+    padding: 20px;
     background-color: var(--sand);
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     grid-template-rows: repeat(3, 1fr);
+    gap: 20px;
 }
 
 .book-card {
     display: flex;
+    flex: 1;
+    justify-content: space-evenly;
     flex-direction: column;
     background-color: var(--brick);
     color: white;
-    margin: 30px;
     padding: 20px;
     border: none;
     border-radius: 20px;
+}
+
+.book-card p {
+    margin: 0;
+}
+
+.book-card button {
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .book-card:hover,
@@ -109,19 +122,19 @@ form.add-book input:focus-visible {
 }
 
 .book-card p.book-name::before {
-    content: 'Name: '
+    content: 'Name:\0020\0020\0020\0020'
 }
 
 .book-card p.book-author::before {
-    content: 'Author: ';
+    content: 'Author:\0020\0020\0020\0020';
 }
 
 .book-card p.book-genre::before {
-    content: 'Genre: ';
+    content: 'Genre:\0020\0020\0020\0020';
 }
 
 .book-card p.book-pages::before {
-    content: 'Pages: ';
+    content: 'Pages:\0020\0020\0020\0020';
 }
 
 button#remove-book {
