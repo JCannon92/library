@@ -5,6 +5,7 @@ function Book(
     author,
     genre,
     pages,
+    read,
 ) {
     this.id = crypto.randomUUID();
     this.name = name;
@@ -12,13 +13,15 @@ function Book(
     this.genre = genre;
     this.pages = pages;
     this.displaying = false;
+    this.read = read;
 }
 
 theFellowship = new Book(
     'The Fellowship of the Ring',
     'J.R.R. Tolkien',
     'Fantasy',
-    500
+    500,
+    true,
 );
 
 gameOfThrones = new Book(
@@ -26,20 +29,23 @@ gameOfThrones = new Book(
     'George R. R. Martin',
     'Fantasy',
     1200,
+    true,
 );
 
 coldComfortFarm = new Book(
     'Cold Comfort Farm',
     'Stella Gibbons',
     'Classic',
-    280
+    280,
+    true,
 );
 
 imGladMyMomDied = new Book(
     "I'm Glad My Mom Died",
     'Jeanette McCurdy',
     'Autobiography',
-    340
+    340,
+    false,
 );
 
 const library = [
@@ -58,12 +64,14 @@ function addBookToLibrary(
     author,
     genre,
     pages,
+    read,
 ) {
     const newBook = new Book (
         name,
         author,
         genre,
         pages,
+        read,
     );
 
     library.push(newBook);
@@ -76,13 +84,15 @@ addNewBookButton.addEventListener('click', () => {
     const author = document.querySelector('input#book-author').value;
     const genre = document.querySelector('input#book-genre').value;
     const pages = document.querySelector('input#book-pages').value;
+    const read = document.querySelector('input#book-read').value;
 
     addBookToLibrary(
         library,
         name,
         author,
         genre,
-        pages,        
+        pages,
+        read,        
     );
 
     //Clear inputs
@@ -117,26 +127,47 @@ function displayBook(
         const pages = document.createElement('p');
         pages.classList.add('book-pages');
 
+        const read = document.createElement('input');
+        read.classList.add('book-read');
+        read.type = 'checkbox';
+        read.disabled = true;
+
+
         //Set their text
         name.textContent = book.name;
         author.textContent = book.author;
         genre.textContent = book.genre;
         pages.textContent = book.pages;
+        read.checked = book.read;
 
         // Append to the container
         bookCard.appendChild(name);
         bookCard.appendChild(author);
         bookCard.appendChild(genre);
         bookCard.appendChild(pages);
+        bookCard.appendChild(read);
         
 
-        //Create and append the button
+        //Create a button container
+        const buttonContainer = document.createElement('div');
+        buttonContainer.classList.add('button-container');
+
+        //Create and append the remove button
         const removeBookButton = document.createElement('button');
-        removeBookButton.id = 'remove-book';
         removeBookButton.textContent = 'Remove Book';
         //Add remove book functionality, see below
         removeBookButton.addEventListener('click', removeBook)
-        bookCard.appendChild(removeBookButton);
+        buttonContainer.appendChild(removeBookButton);
+
+        //Create and append the read button
+        const readBookButton = document.createElement('button');
+        readBookButton.textContent = 'Read Book';
+        //Add read book functionality to button
+        readBookButton.addEventListener('click', readBook);
+        buttonContainer.appendChild(readBookButton);
+
+        //Append button container to card
+        bookCard.appendChild(buttonContainer);
 
         //Append the card as a child of the card-container element
         const library = document.querySelector('div.card-container');
@@ -163,7 +194,7 @@ function removeBookFromLibrary(id) {
 
 function removeBook(event) {
         //Remove the book from the library using the id of the bookCard (the same as the book's ID)
-        removeBookFromLibrary(event.target.parentElement.id);
+        removeBookFromLibrary(event.target.parentElement.parentElement.id);
         //Remove the book from the display
         event.target.parentElement.remove();
 }
@@ -178,3 +209,12 @@ function clearDisplay() {
 }
 
 document.querySelector('button#clear-display').addEventListener('click', clearDisplay);
+
+
+//Read book
+
+function readBook(event) {
+    //Mark book as read through its object
+    const book = library[event.parentElement.parentElement.id];
+    book.read = true;
+}
