@@ -88,7 +88,7 @@ addNewBookButton.addEventListener('click', () => {
     const author = document.querySelector('input#book-author').value;
     const genre = document.querySelector('input#book-genre').value;
     const pages = document.querySelector('input#book-pages').value;
-    const read = document.querySelector('input#book-read').value;
+    const read = document.querySelector('input#book-read').checked;
 
     addBookToLibrary(
         library,
@@ -114,41 +114,66 @@ function displayBook(
     book,
 ) {
     if (book.displaying === false) {
-        //Create the text elements
+        //Create the text elements including their labels
         const bookCard = document.createElement('div');
         bookCard.classList.add('book-card');
         bookCard.setAttribute('uuid', book.id);
 
         const name = document.createElement('p');
         name.classList.add('book-name');
+        const nameLabel = document.createElement('p');
+        nameLabel.classList.add('card-label');
 
         const author = document.createElement('p');
         author.classList.add('book-author');
+        const authorLabel = document.createElement('p');
+        authorLabel.classList.add('card-label');
         
         const genre = document.createElement('p');
         genre.classList.add('book-genre');
+        const genreLabel = document.createElement('p');
+        genreLabel.classList.add('card-label');
         
         const pages = document.createElement('p');
         pages.classList.add('book-pages');
+        const pagesLabel = document.createElement('p');
+        pagesLabel.classList.add('card-label');
 
         const read = document.createElement('input');
         read.classList.add('book-read');
         read.type = 'checkbox';
         read.disabled = true;
+        const readLabel = document.createElement('p');
+        readLabel.classList.add('card-label');
+
 
 
         //Set their text
+        nameLabel.textContent = 'Name:';
         name.textContent = book.name;
+
+        authorLabel.textContent = 'Author:';
         author.textContent = book.author;
+
+        genreLabel.textContent = 'Genre:';
         genre.textContent = book.genre;
+
+        pagesLabel.textContent = 'Pages:';
         pages.textContent = book.pages;
+
+        readLabel.textContent = 'Read:';
         read.checked = book.read;
 
         // Append to the container
+        bookCard.appendChild(nameLabel);
         bookCard.appendChild(name);
+        bookCard.appendChild(authorLabel);
         bookCard.appendChild(author);
+        bookCard.appendChild(genreLabel);
         bookCard.appendChild(genre);
+        bookCard.appendChild(pagesLabel);
         bookCard.appendChild(pages);
+        bookCard.appendChild(readLabel);
         bookCard.appendChild(read);
         
 
@@ -192,7 +217,7 @@ function removeBookFromLibrary(id) {
     //Find the book's index and then remove it from the library array
     const bookIndex = getBookIndexByID(id);
     if (bookIndex >= 0) {
-        library.splice(bookIndex);
+        library.splice(bookIndex, 1);
     };
 }
 
@@ -200,7 +225,7 @@ function removeBook(event) {
         //Remove the book from the library using the id of the bookCard (the same as the book's ID)
         removeBookFromLibrary(event.target.parentElement.parentElement.getAttribute('uuid'));
         //Remove the book from the display
-        event.target.parentElement.remove();
+        event.target.parentElement.parentElement.remove();
 }
 
 
