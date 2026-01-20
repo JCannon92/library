@@ -55,6 +55,10 @@ const library = [
     imGladMyMomDied
 ];
 
+function getBookIndexByID(id) {
+    return library.findIndex(element => element.id === id);
+}
+
 
 //Adding new books
 
@@ -113,7 +117,7 @@ function displayBook(
         //Create the text elements
         const bookCard = document.createElement('div');
         bookCard.classList.add('book-card');
-        bookCard.id = book.id;
+        bookCard.setAttribute('uuid', book.id);
 
         const name = document.createElement('p');
         name.classList.add('book-name');
@@ -160,11 +164,11 @@ function displayBook(
         buttonContainer.appendChild(removeBookButton);
 
         //Create and append the read button
-        const readBookButton = document.createElement('button');
-        readBookButton.textContent = 'Read Book';
+        const toggleReadButton = document.createElement('button');
+        toggleReadButton.textContent = 'Toggle Read';
         //Add read book functionality to button
-        readBookButton.addEventListener('click', readBook);
-        buttonContainer.appendChild(readBookButton);
+        toggleReadButton.addEventListener('click', toggleRead);
+        buttonContainer.appendChild(toggleReadButton);
 
         //Append button container to card
         bookCard.appendChild(buttonContainer);
@@ -186,7 +190,7 @@ displayLibraryButton.addEventListener('click', () => {
 //Removing books
 function removeBookFromLibrary(id) {
     //Find the book's index and then remove it from the library array
-    const bookIndex = library.findIndex(element => element.id === id);
+    const bookIndex = getBookIndexByID(id);
     if (bookIndex >= 0) {
         library.splice(bookIndex);
     };
@@ -194,7 +198,7 @@ function removeBookFromLibrary(id) {
 
 function removeBook(event) {
         //Remove the book from the library using the id of the bookCard (the same as the book's ID)
-        removeBookFromLibrary(event.target.parentElement.parentElement.id);
+        removeBookFromLibrary(event.target.parentElement.parentElement.getAttribute('uuid'));
         //Remove the book from the display
         event.target.parentElement.remove();
 }
@@ -213,8 +217,16 @@ document.querySelector('button#clear-display').addEventListener('click', clearDi
 
 //Read book
 
-function readBook(event) {
+function toggleRead(event) {
     //Mark book as read through its object
-    const book = library[event.parentElement.parentElement.id];
-    book.read = true;
+    const bookID = event.target.parentElement.parentElement.getAttribute('uuid');
+    const readCheckbox = document.querySelector(`.book-card[uuid="${bookID}"] input.book-read`);
+    const book = library[getBookIndexByID(bookID)];
+    if (book.read === true) {
+        book.read = false;
+        readCheckbox.checked = false;
+    } else {
+        book.read = true;
+        readCheckbox.checked = true;
+    }
 }

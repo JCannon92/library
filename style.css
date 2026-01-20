@@ -107,10 +107,6 @@ form.add-book input:focus-visible {
     margin: 0;
 }
 
-.book-card input {
-
-}
-
 .book-card button {
     margin: 2px;
     width: 50%;
@@ -148,7 +144,3 @@ form.add-book input:focus-visible {
     content: 'Read: ';
 }
 
-
-.book-card button {
-
-}
