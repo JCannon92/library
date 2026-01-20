@@ -59,7 +59,6 @@ function getBookIndexByID(id) {
     return library.findIndex(element => element.id === id);
 }
 
-
 //Adding new books
 
 function addBookToLibrary(
@@ -90,20 +89,32 @@ addNewBookButton.addEventListener('click', () => {
     const pages = document.querySelector('input#book-pages').value;
     const read = document.querySelector('input#book-read').checked;
 
-    addBookToLibrary(
-        library,
-        name,
-        author,
-        genre,
-        pages,
-        read,        
-    );
+    //Check for blank fields and alert user, otherwise add to library
+    if (name === '' || author === '' || genre === '' || pages === '') {
+        addErrorMessage('You must enter all fields.')    ;
+    } else {
+        addBookToLibrary(
+            library,
+            name,
+            author,
+            genre,
+            pages,
+            read,        
+        );
 
-    //Clear inputs
-    document.querySelectorAll('input').forEach((e) => {e.value = null;});
+        //Clear inputs
+        document.querySelectorAll('input').forEach((e) => {e.value = null;});
 
-    //Display book
-    displayBook(library.slice(-1)[0]);
+        //Display book
+        displayBook(library.slice(-1)[0]);
+
+        //Remove error message if it exists
+        const errorMessage = document.querySelector('.error-message');
+        if ( errorMessage != null) {
+            errorMessage.remove();
+        }
+
+    }
 });
 
 
@@ -253,5 +264,20 @@ function toggleRead(event) {
     } else {
         book.read = true;
         readCheckbox.checked = true;
+    }
+}
+
+//Add Error Message
+function addErrorMessage (message) {
+    //Only add if an error message doesn't already exist
+    if (document.querySelector('.error-message') === null) {
+        //Set error message
+        const errorMessage = document.createElement('p');
+        errorMessage.classList.add('error-message');
+        errorMessage.textContent = message;
+
+        //Append to title container
+        const titleContainer = document.querySelector('.title-container');
+        titleContainer.appendChild(errorMessage);
     }
 }
