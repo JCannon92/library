@@ -70,7 +70,8 @@ form.add-book label {
     color: white;
 }
 
-form.add-book input:not([type="checkbox"]) {
+form.add-book input:not([type="checkbox"]),
+form.add-book select {
     padding: 10px;
     border: none;
     border-radius: 10px;
@@ -78,7 +79,9 @@ form.add-book input:not([type="checkbox"]) {
 }
 
 form.add-book input:not([type="checkbox"]):focus,
-form.add-book input:not([type="checkbox"]):focus-visible {
+form.add-book input:not([type="checkbox"]):focus-visible,
+form.add-book select:focus,
+form.add-book select:focus-visible {
     outline: 3px solid var(--cornflower);
 }
 

@@ -48,11 +48,20 @@ imGladMyMomDied = new Book(
     false,
 );
 
+theTaleOfSquirrelNutkin = new Book(
+    'The Tale of Squirrel Nutkin',
+    'Beatrix Potter',
+    "Children's",
+    20,
+    true,
+);
+
 const library = [
     theFellowship,
     gameOfThrones,
     coldComfortFarm,
-    imGladMyMomDied
+    imGladMyMomDied,
+    theTaleOfSquirrelNutkin,
 ];
 
 function getBookIndexByID(id) {
