@@ -94,12 +94,12 @@ addNewBookButton.addEventListener('click', () => {
     //Find book variables.
     const name = document.querySelector('input#book-name').value;
     const author = document.querySelector('input#book-author').value;
-    const genre = document.querySelector('input#book-genre').value;
+    const genre = document.querySelector('select#book-genre').value;
     const pages = document.querySelector('input#book-pages').value;
     const read = document.querySelector('input#book-read').checked;
 
     //Check for blank fields and alert user, otherwise add to library
-    if (name === '' || author === '' || genre === '' || pages === '') {
+    if (name === '' || author === '' || genre === 'Select a genre' || pages === '') {
         addErrorMessage('You must enter all fields.')    ;
     } else {
         addBookToLibrary(
