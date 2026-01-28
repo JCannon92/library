@@ -1,19 +1,21 @@
 //Basic setup
 
-function Book(
-    name,
-    author,
-    genre,
-    pages,
-    read,
-) {
-    this.id = crypto.randomUUID();
-    this.name = name;
-    this.author = author;
-    this.genre = genre;
-    this.pages = pages;
-    this.displaying = false;
-    this.read = read;
+class Book {
+    constructor(
+        name,
+        author,
+        genre,
+        pages,
+        read,
+    ) {
+        this.id = crypto.randomUUID();
+        this.name = name;
+        this.author = author;
+        this.genre = genre;
+        this.pages = pages;
+        this.displaying = false;
+        this.read = read;
+    }
 }
 
 theFellowship = new Book(
